@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groove Music Player - Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    
+    <div class="login-container">
+        <div class="logo">
+            <h1>Groove Music Player</h1>
+        </div>
+        <h2>Log in to your account</h2>
+
+        <!-- <div class="social-login">
+            <button class="btn google">Continue with Google</button>
+            <button class="btn facebook">Continue with Facebook</button>
+            <button class="btn phone">Continue with Phone Number</button>
+        </div> -->
+        
+        <div class="divider">
+            <span>or</span>
+        </div>
+        
+        <form class="login-form" onsubmit="handleLogin(event)">
+            <label for="email">Email or Username</label>
+            <input type="text" id="email" placeholder="Email or username" required>
+
+            <label for="password">Password</label>
+            <div class="password-container">
+                <input type="password" id="password"¬ placeholder="Password" required>
+                <i class="toggle-password" onclick="togglePasswordVisibility()">👁</i>
+            </div>
+
+            <button type="submit" class="btn login">Log In</button>
+        </form>
+
+        <p class="forgot-password"><a href="#">Forgot your password?</a></p>
+        <p class="signup-link">Don't have an account? <a href="signup.html">Sign up for Groove Music</a></p>
+
+        <footer>
+            <p>This site is protected by reCAPTCHA and the Google <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> apply.</p>
+        </footer>
+    </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault(); 
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html> 
+
+

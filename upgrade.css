@@ -1,0 +1,125 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #f1f1f1; 
+    position: relative;
+}
+
+#subscription-container {
+    background-color: #1e1e1e; 
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 600px;
+    padding: 30px;
+    -webkit-box-shadow:0px 0px 190px 63px rgba(122,29,172,0.2);
+    -moz-box-shadow: 0px 0px 190px 63px rgba(122,29,172,0.2);
+    box-shadow: 0px 0px 190px 63px rgba(122,29,172,0.2);
+}
+
+#subscription-header {
+    text-align: center;
+}
+
+#subscription-header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #f1f1f1; /* Light title text */
+}
+
+#subscription-header p {
+    font-size: 1.2rem;
+    color: #b3b3b3; /* Slightly muted light text */
+}
+
+#subscription-options {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+}
+
+#basic-plan,
+#premium-plan {
+    width: 45%;
+    padding: 20px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#premium-plan {
+    background: linear-gradient(135deg, #ff6a00, #ee0979);
+}
+
+#basic-plan h3,
+#premium-plan h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#basic-plan p,
+#premium-plan p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+#price-basic,
+#price-premium {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#subscribe-basic,
+#subscribe-premium {
+    background-color: white;
+    color: #121212; /* Darker text inside buttons */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#subscribe-basic:hover,
+#subscribe-premium:hover {
+    background-color: #333;
+    color: white;
+}
+
+#basic-plan:hover,
+#premium-plan:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+}
+
+#subscription-benefits {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#subscription-benefits h2 {
+    font-size: 1.8rem;
+    color: #f1f1f1;
+    margin-bottom: 15px;
+}
+
+#subscription-benefits ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.2rem;
+    color: #b3b3b3; /* Muted text for benefits */
+}
+
+#subscription-benefits ul li {
+    margin-bottom: 10px;
+}
