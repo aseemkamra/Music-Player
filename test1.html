@@ -9,26 +9,54 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="test1.css" />
+    <style>
+      .home-button {
+        padding: 10px 15px;
+        background-color: #1DB954;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transition: all 0.2s ease;
+      }
+      .home-button:hover {
+        background-color: #19a34a;
+        transform: scale(1.05);
+      }
+      .home-button img {
+        width: 16px;
+        height: 16px;
+        filter: invert(1);
+      }
+    </style>
   </head>
   <body>
     <div class="container">
       <!-- Left Sidebar -->
       <aside class="sidebar">
         <h2>Your Library</h2>
+        <a href="javascript:void(0);" onclick="navigateWithoutStopping('index.html')" class="home-button">
+          <img src="images/home.svg" alt="Home" onerror="this.src='images/playlist.svg'"> Groove Home
+        </a>
         <div class="menu">
           <input type="text" class="search" placeholder="Search..." />
           <ul>
             <a href="play2.html"><li>Today's Top Hits</li></a>
             <a href="play3.html"><li>Hit Songs of 2024</li></a>
             <a href="play4.html"><li>Top 50 of 2010</li></a>
-            <a href="play4.html"><li>Top of the world</li></a>
-            <a href="play4.html"><li>100 hits of 2016-18</li></a>
-            <a href="play4.html"><li>Old Melodies</li></a>
-            <a href="play4.html"><li>Top songs of 90's!</li></a>
-            <a href="play4.html"><li>Party hits!</li></a>
-            <a href="play4.html"><li>80's top 100</li></a>
-            <a href="play4.html"><li>Punjabi Bass Boosted</li></a>
-            <a href="play4.html"><li>New Released!</li></a>
+            <a href="play5.html"><li>Top of the world</li></a>
+            <a href="play6.html"><li>100 hits of 2016-18</li></a>
+            <a href="play7.html"><li>Old Melodies</li></a>
+            <a href="play8.html"><li>Top songs of 90's!</li></a>
+            <a href="play9.html"><li>Party hits!</li></a>
+            <a href="play10.html"><li>80's top 100</li></a>
+            <a href="play11.html"><li>Punjabi Bass Boosted</li></a>
+            <a href="play12.html"><li>New Released!</li></a>
           </ul>
         </div>
       </aside>
@@ -80,10 +108,11 @@
                   <div class="range">
                     <input
                       type="range"
+                      id="volumeControl"
                       min="0"
-                      max="100"
-                      value="50"
-                      name="volume"
+                      max="1"
+                      step="0.01"
+                      value="0.5"
                     />
                   </div>
                 </div>
@@ -94,5 +123,20 @@
       </main>
     </div>
     <script src="test1.js"></script>
+    <script>
+      // Function to navigate without stopping music
+      function navigateWithoutStopping(url) {
+        // Store current song info in localStorage
+        const currentsong = document.querySelector('audio');
+        if (currentsong && currentsong.src) {
+          localStorage.setItem('currentSongSrc', currentsong.src);
+          localStorage.setItem('currentSongTime', currentsong.currentTime.toString());
+          localStorage.setItem('isPlaying', (!currentsong.paused).toString());
+          localStorage.setItem('currentVolume', currentsong.volume.toString());
+        }
+        // Navigate to the specified URL
+        window.location.href = url;
+      }
+    </script>
   </body>
 </html>

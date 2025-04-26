@@ -8,6 +8,8 @@
     <link rel="shortcut icon" href="images/Radio.png">
     <link rel="stylesheet" href="css1.css">
     <link rel="stylesheet" href="css2.css">
+    <link rel="stylesheet" href="user-profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -19,9 +21,12 @@
             <div class="home bg-grey rounded m-1 p-1">
                 <div class="logo"><img style="width: 100px;"  src="images/Radio.png" class="invert" alt="">
                     <span class="logo-text">  Groove </span>
-
                 </div>
-               
+                <ul class="nav-items">
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" id="liked-songs-link"><i class="fas fa-heart"></i> Liked Songs</a></li>
+                    <li><a href="#" id="create-playlist-btn"><i class="fas fa-plus-circle"></i> Create Playlist</a></li>
+                </ul>
             </div>
             <div class="library bg-grey rounded m-1 p-1">
                 <div class="heading">
@@ -34,10 +39,6 @@
                     <ul>
                         
                     </ul>
-                </div>
-                <div class="footer">
-                    <p>&copy; 2024 Groove Music. All rights reserved.</p>
-                    
                 </div>
             </div>
         </div>
@@ -63,14 +64,36 @@
                     <div>
                         <i class="fas fa-search search-ico"></i>
                     </div>
-                    <input type="text" name="search" placeholder="Search">
+                    <input type="text" name="search" id="search-input" placeholder="Search songs, playlists...">
                     <div>
                         <i class="fas fa-microphone mic-ico"></i>
                     </div>
-                    <button class="new-search-btn">Search</button> <!-- New search button -->
+                    <button class="new-search-btn" id="search-btn">Search</button>
                 </div>
                 <a href="upgrade.html"><button class="upgrade">Upgrade</button></a>
-                <div class="buttons">
+                <!-- User profile section -->
+                <div class="user-section" style="display: none;">
+                    <div class="user-profile-container">
+                        <div class="profile-icon"></div>
+                        <span class="username"></span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="user-dropdown">
+                        <div class="dropdown-header">
+                            <div class="profile-icon-large"></div>
+                            <div class="user-details">
+                                <span class="username-large"></span>
+                                <span class="user-email"></span>
+                            </div>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="user-profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="buttons" id="authButtons">
                     <button class="signupbtn" onclick="window.location.href='signup.html'">Sign up</button>
                     <button class="loginbtn" onclick="window.location.href='login.html'">Log in</button>
                 </div>
@@ -283,6 +306,87 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script src="user.js"></script>
+    <script src="user-profile.js"></script>
+    <script src="liked-songs.js"></script>
+    <script>
+        // Function to navigate without stopping music
+        function navigateWithoutStopping(url) {
+            // Store current song info in localStorage
+            const currentsong = document.querySelector('audio');
+            if (currentsong && currentsong.src) {
+                localStorage.setItem('currentSongSrc', currentsong.src);
+                localStorage.setItem('currentSongTime', currentsong.currentTime.toString());
+                localStorage.setItem('isPlaying', (!currentsong.paused).toString());
+                localStorage.setItem('currentVolume', currentsong.volume.toString());
+                console.log("Saved playback state:", {
+                    src: currentsong.src,
+                    time: currentsong.currentTime,
+                    isPlaying: !currentsong.paused
+                });
+            } else {
+                console.log("No audio playing to save");
+            }
+            // Navigate to the specified URL
+            window.location.href = url;
+        }
+
+        // Update all playlist links to use the navigate function
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update all card play buttons
+            document.querySelectorAll('.card .play a').forEach(link => {
+                const originalHref = link.getAttribute('href');
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navigateWithoutStopping(originalHref);
+                });
+            });
+            
+            // Initialize user interface based on login status
+            if (typeof updateUserInterface === 'function') {
+                updateUserInterface();
+            } else if (typeof updateUIBasedOnLoginStatus === 'function') {
+                updateUIBasedOnLoginStatus();
+            }
+        });
+    </script>
+    <!-- Custom JS -->
+    <script src="playlists.js"></script>
+    <script src="theme-switcher.js"></script>
+    <!-- Create Playlist Modal -->
+    <div class="modal" id="create-playlist-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Playlist</h2>
+                <p>Add a name for your playlist</p>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="playlist-name" placeholder="My Playlist">
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn cancel" id="cancel-create-playlist">Cancel</button>
+                <button class="modal-btn create" id="confirm-create-playlist">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add to Playlist Modal -->
+    <div class="modal" id="add-to-playlist-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add to Playlist</h2>
+                <p>Choose a playlist to add this song to</p>
+            </div>
+            <div class="modal-body">
+                <div id="playlists-list">
+                    <!-- Playlists will be dynamically added here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn cancel" id="cancel-add-to-playlist">Cancel</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

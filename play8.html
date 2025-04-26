@@ -6,12 +6,40 @@
     <title>Playlist</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="play3.css">
+    <style>
+      .home-button {
+        padding: 10px 15px;
+        background-color: #1DB954;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        margin-bottom: 15px;
+        transition: all 0.2s ease;
+      }
+      .home-button:hover {
+        background-color: #19a34a;
+        transform: scale(1.05);
+      }
+      .home-button img {
+        width: 16px;
+        height: 16px;
+        filter: invert(1);
+      }
+    </style>
 </head>
 <body>
     <div class="container">
         <!-- Left Sidebar -->
         <aside class="sidebar">
             <h2>Your Library</h2>
+            <a href="index.html" class="home-button">
+              <img src="images/home.svg" alt="Home" onerror="this.src='images/playlist.svg'"> Groove Home
+            </a>
             <div class="menu">
                 <input type="text" class="search" placeholder="Search...">
                 <ul>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile | Music Player</title>
+    <link rel="stylesheet" href="user-profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-music"></i>
+                <span>MusicStream</span>
+            </a>
+        </div>
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for songs, artists, or albums">
+            </div>
+        </div>
+        <div class="nav-controls">
+            <!-- <button class="login-btn">Login</button> -->
+            <div class="user-section">
+                <div class="user-profile-container">
+                    <div class="profile-icon">A</div>
+                    <span class="username">Alex</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="user-dropdown">
+                    <div class="user-info">
+                        <div class="profile-icon-large">A</div>
+                        <div class="user-details">
+                            <h3 class="username-large">Alex Johnson</h3>
+                            <p class="user-email">alex@example.com</p>
+                        </div>
+                    </div>
+                    <ul class="dropdown-menu">
+                        <li><a href="#profile"><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="#support"><i class="fas fa-question-circle"></i> Help & Support</a></li>
+                        <li><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-search"></i> Browse</a></li>
+                <li><a href="#"><i class="fas fa-headphones"></i> Library</a></li>
+                <li><a href="#"><i class="fas fa-heart"></i> Favorites</a></li>
+                <li><a href="#"><i class="fas fa-plus"></i> Create Playlist</a></li>
+            </ul>
+            <div class="premium-banner">
+                <h3>Go Premium</h3>
+                <p>Ad-free music, offline listening, and more!</p>
+                <button class="upgrade-btn">Upgrade</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div class="profile-header">
+                <div class="profile-avatar-container">
+                    <div class="profile-avatar" id="profileAvatar">A</div>
+                    <div class="avatar-overlay">
+                        <label for="profilePhotoInput" class="edit-photo-btn">
+                            <i class="fas fa-camera"></i>
+                        </label>
+                        <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <div class="profile-name-container">
+                        <h2 id="profileName">Alex Johnson</h2>
+                        <button class="edit-name-btn" id="editNameBtn"><i class="fas fa-pencil-alt"></i></button>
+                    </div>
+                    <div class="edit-name-container" style="display: none;">
+                        <input type="text" id="nameInput" class="name-input">
+                        <button class="save-name-btn" id="saveNameBtn">Save</button>
+                        <button class="cancel-name-btn" id="cancelNameBtn">Cancel</button>
+                    </div>
+                    <p class="member-since">Member since <span id="memberSince">January 2022</span></p>
+                </div>
+            </div>
+            
+            <section class="user-stats">
+                <div class="stat-box">
+                    <h3>Playlists</h3>
+                    <span class="stat-number playlists-count">12</span>
+                </div>
+                <div class="stat-box">
+                    <h3>Favorites</h3>
+                    <span class="stat-number favorites-count">87</span>
+                </div>
+                <div class="stat-box">
+                    <h3>Following</h3>
+                    <span class="stat-number following-count">34</span>
+                </div>
+            </section>
+            
+            <section class="recent-activity">
+                <h2>Recent Activity</h2>
+                <div class="activity-list">
+                    <!-- Activity items will be populated via JavaScript -->
+                </div>
+            </section>
+            
+            <section class="user-playlists">
+                <div class="section-header">
+                    <h2>Your Playlists</h2>
+                    <a href="#" class="see-all">See All</a>
+                </div>
+                <div class="playlist-grid" id="playlistGrid">
+                    <!-- Playlists will be loaded dynamically -->
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Groove</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Help & Support</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Developers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookies</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; MusicStream. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="user.js"></script>
+    <script src="user-profile.js"></script>
+</body>
+</html> 
