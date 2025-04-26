@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar">
         <div class="logo-container">
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <i class="fas fa-music"></i>
                 <span>MusicStream</span>
             </a>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="nav-controls">
-            <button class="login-btn">Login</button>
+            <!-- <button class="login-btn">Login</button> -->
             <div class="user-section">
                 <div class="user-profile-container">
                     <div class="profile-icon">A</div>
@@ -51,7 +51,7 @@
     <div class="page-container">
         <aside class="sidebar">
             <ul class="menu">
-                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#"><i class="fas fa-search"></i> Browse</a></li>
                 <li><a href="#"><i class="fas fa-headphones"></i> Library</a></li>
                 <li><a href="#"><i class="fas fa-heart"></i> Favorites</a></li>
@@ -66,11 +66,26 @@
         
         <main class="main-content">
             <div class="profile-header">
-                <div class="profile-avatar">A</div>
+                <div class="profile-avatar-container">
+                    <div class="profile-avatar" id="profileAvatar">A</div>
+                    <div class="avatar-overlay">
+                        <label for="profilePhotoInput" class="edit-photo-btn">
+                            <i class="fas fa-camera"></i>
+                        </label>
+                        <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;">
+                    </div>
+                </div>
                 <div class="profile-info">
-                    <h2>Alex Johnson</h2>
-                    <p class="member-since">Member since January 2022</p>
-                    <button class="edit-profile-btn">Edit Profile</button>
+                    <div class="profile-name-container">
+                        <h2 id="profileName">Alex Johnson</h2>
+                        <button class="edit-name-btn" id="editNameBtn"><i class="fas fa-pencil-alt"></i></button>
+                    </div>
+                    <div class="edit-name-container" style="display: none;">
+                        <input type="text" id="nameInput" class="name-input">
+                        <button class="save-name-btn" id="saveNameBtn">Save</button>
+                        <button class="cancel-name-btn" id="cancelNameBtn">Cancel</button>
+                    </div>
+                    <p class="member-since">Member since <span id="memberSince">January 2022</span></p>
                 </div>
             </div>
             
@@ -101,35 +116,8 @@
                     <h2>Your Playlists</h2>
                     <a href="#" class="see-all">See All</a>
                 </div>
-                <div class="playlist-grid">
-                    <div class="playlist-card">
-                        <div class="playlist-image">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <h3>Workout Mix</h3>
-                        <p>15 songs</p>
-                    </div>
-                    <div class="playlist-card">
-                        <div class="playlist-image">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <h3>Chill Vibes</h3>
-                        <p>24 songs</p>
-                    </div>
-                    <div class="playlist-card">
-                        <div class="playlist-image">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <h3>Road Trip</h3>
-                        <p>18 songs</p>
-                    </div>
-                    <div class="playlist-card">
-                        <div class="playlist-image">
-                            <i class="fas fa-music"></i>
-                        </div>
-                        <h3>2010s Hits</h3>
-                        <p>32 songs</p>
-                    </div>
+                <div class="playlist-grid" id="playlistGrid">
+                    <!-- Playlists will be loaded dynamically -->
                 </div>
             </section>
         </main>
@@ -171,10 +159,11 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2023 MusicStream. All rights reserved.</p>
+            <p>&copy; MusicStream. All rights reserved.</p>
         </div>
     </footer>
     
+    <script src="user.js"></script>
     <script src="user-profile.js"></script>
 </body>
 </html> 

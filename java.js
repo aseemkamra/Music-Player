@@ -485,6 +485,37 @@ async function main() {
     });
 }
 
-// Initialize the player
-main();
+/**
+ * Handle profile navigation
+ */
+function initProfileNavigation() {
+    // Check if user is logged in
+    if (isLoggedIn()) {
+        // Set up profile link in dropdown
+        const profileLink = document.querySelector('.user-dropdown a[href="user-profile.html"]');
+        if (profileLink) {
+            profileLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'user-profile.html';
+            });
+        }
+    }
+}
+
+// Call this function on DOM content loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Other initializations
+    try {
+        main();
+    } catch (error) {
+        console.error("Error initializing main player:", error);
+    }
+    
+    // Initialize profile navigation
+    try {
+        initProfileNavigation();
+    } catch (error) {
+        console.error("Error initializing profile navigation:", error);
+    }
+});
 	

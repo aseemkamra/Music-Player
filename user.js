@@ -10,6 +10,9 @@ class User {
         this.playlists = [];
         this.favoriteArtists = [];
         this.recentlyPlayed = [];
+        this.favorites = [];
+        this.following = [];
+        this.profilePhoto = null;
     }
 }
 
@@ -105,11 +108,21 @@ function updateUserInterface() {
                 usernameSpan.textContent = currentUser.username;
             }
             
-            // Update profile initial in icon
+            // Update profile initial or photo in icon
             const profileIcon = el.querySelector('.profile-icon');
             if (profileIcon) {
-                const initial = currentUser.username.charAt(0).toUpperCase();
-                profileIcon.textContent = initial;
+                if (currentUser.profilePhoto) {
+                    // If user has a profile photo
+                    profileIcon.textContent = '';
+                    profileIcon.style.backgroundImage = `url(${currentUser.profilePhoto})`;
+                    profileIcon.style.backgroundSize = 'cover';
+                    profileIcon.style.backgroundPosition = 'center';
+                } else {
+                    // Use initial
+                    profileIcon.style.backgroundImage = 'none';
+                    const initial = currentUser.username.charAt(0).toUpperCase();
+                    profileIcon.textContent = initial;
+                }
             }
             
             // Update dropdown details if they exist
@@ -119,7 +132,20 @@ function updateUserInterface() {
             
             if (usernameLarge) usernameLarge.textContent = currentUser.username;
             if (userEmail && currentUser.email) userEmail.textContent = currentUser.email;
-            if (profileIconLarge) profileIconLarge.textContent = currentUser.username.charAt(0).toUpperCase();
+            
+            if (profileIconLarge) {
+                if (currentUser.profilePhoto) {
+                    // If user has a profile photo
+                    profileIconLarge.textContent = '';
+                    profileIconLarge.style.backgroundImage = `url(${currentUser.profilePhoto})`;
+                    profileIconLarge.style.backgroundSize = 'cover';
+                    profileIconLarge.style.backgroundPosition = 'center';
+                } else {
+                    // Use initial
+                    profileIconLarge.style.backgroundImage = 'none';
+                    profileIconLarge.textContent = currentUser.username.charAt(0).toUpperCase();
+                }
+            }
         });
     } else {
         // Show login/signup buttons

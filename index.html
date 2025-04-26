@@ -21,9 +21,12 @@
             <div class="home bg-grey rounded m-1 p-1">
                 <div class="logo"><img style="width: 100px;"  src="images/Radio.png" class="invert" alt="">
                     <span class="logo-text">  Groove </span>
-
                 </div>
-               
+                <ul class="nav-items">
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" id="liked-songs-link"><i class="fas fa-heart"></i> Liked Songs</a></li>
+                    <li><a href="#" id="create-playlist-btn"><i class="fas fa-plus-circle"></i> Create Playlist</a></li>
+                </ul>
             </div>
             <div class="library bg-grey rounded m-1 p-1">
                 <div class="heading">
@@ -36,10 +39,6 @@
                     <ul>
                         
                     </ul>
-                </div>
-                <div class="footer">
-                    <p>&copy; 2024 Groove Music. All rights reserved.</p>
-                    
                 </div>
             </div>
         </div>
@@ -65,11 +64,11 @@
                     <div>
                         <i class="fas fa-search search-ico"></i>
                     </div>
-                    <input type="text" name="search" placeholder="Search">
+                    <input type="text" name="search" id="search-input" placeholder="Search songs, playlists...">
                     <div>
                         <i class="fas fa-microphone mic-ico"></i>
                     </div>
-                    <button class="new-search-btn">Search</button> <!-- New search button -->
+                    <button class="new-search-btn" id="search-btn">Search</button>
                 </div>
                 <a href="upgrade.html"><button class="upgrade">Upgrade</button></a>
                 <!-- User profile section -->
@@ -309,6 +308,7 @@
     <script src="script.js"></script>
     <script src="user.js"></script>
     <script src="user-profile.js"></script>
+    <script src="liked-songs.js"></script>
     <script>
         // Function to navigate without stopping music
         function navigateWithoutStopping(url) {
@@ -353,6 +353,40 @@
     <!-- Custom JS -->
     <script src="playlists.js"></script>
     <script src="theme-switcher.js"></script>
+    <!-- Create Playlist Modal -->
+    <div class="modal" id="create-playlist-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create Playlist</h2>
+                <p>Add a name for your playlist</p>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="playlist-name" placeholder="My Playlist">
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn cancel" id="cancel-create-playlist">Cancel</button>
+                <button class="modal-btn create" id="confirm-create-playlist">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add to Playlist Modal -->
+    <div class="modal" id="add-to-playlist-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add to Playlist</h2>
+                <p>Choose a playlist to add this song to</p>
+            </div>
+            <div class="modal-body">
+                <div id="playlists-list">
+                    <!-- Playlists will be dynamically added here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn cancel" id="cancel-add-to-playlist">Cancel</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
