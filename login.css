@@ -14,8 +14,10 @@ body {
     height: 100vh;
     margin: 0;
     overflow: hidden;
+    position: relative;
 }
 
+/* Login container */
 .login-container {
     background: rgba(253, 251, 251, 0.85);
     padding: 50px;
@@ -25,7 +27,7 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .login-container:hover {
@@ -33,12 +35,14 @@ body {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
 
+/* Logo and title */
 .logo h1 {
-    font-size: 28px;
+    font-size: 30px;
     color: #ff4081;
     font-weight: bold;
     margin-bottom: 20px;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
 }
 
 h2 {
@@ -46,8 +50,10 @@ h2 {
     margin-bottom: 30px;
     color: #ff4081;
     font-weight: normal;
+    transition: color 0.3s ease;
 }
 
+/* Social login buttons */
 .social-login .btn {
     background-color: #3a3a3a;
     margin-bottom: 10px;
@@ -68,10 +74,6 @@ h2 {
     background-color: #1877f2;
 }
 
-/* .social-login .phone {
-    background-color: #1db954;
-} */
-
 .social-login .google:hover {
     background-color: #5a9bf4;
 }
@@ -80,10 +82,7 @@ h2 {
     background-color: #3b88f4;
 }
 
-/* .social-login .phone:hover {
-    background-color: #1ed760;
-} */
-
+/* Divider between forms */
 .divider {
     margin: 20px 0;
     color: #b3b3b3;
@@ -109,6 +108,7 @@ h2 {
     z-index: 0;
 }
 
+/* Form styling */
 .login-form label {
     display: block;
     font-size: 14px;
@@ -130,6 +130,7 @@ h2 {
 
 .login-form input:focus {
     background-color: #333;
+    outline: none;
 }
 
 .login-form .password-container {
@@ -143,6 +144,11 @@ h2 {
     transform: translateY(-50%);
     cursor: pointer;
     color: #aaa;
+    transition: color 0.3s ease;
+}
+
+.login-form .password-container .toggle-password:hover {
+    color: #ff4081;
 }
 
 .login-form .btn {
@@ -161,6 +167,7 @@ h2 {
     background-color: #ff77a9;
 }
 
+/* Links for forgotten password and signup */
 .forgot-password {
     margin-top: 15px;
     font-size: 14px;
@@ -181,6 +188,7 @@ h2 {
     text-decoration: none;
 }
 
+/* Footer */
 footer {
     font-size: 12px;
     color: #b3b3b3;
@@ -223,7 +231,3 @@ body::before {
     height: 350px;
     opacity: 0.6;
 }
-
-
-
-
