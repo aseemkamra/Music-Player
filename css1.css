@@ -202,26 +202,105 @@ body {
 	transition: all ease-in-out 0.1s;
 }
 .search-bar > div > i{
-	color: #ffffff;
+    color: #ffffff;
 }
 .search-bar > div:nth-child(1) {
-	display: inline-block;
-	position: absolute;
-	width: min-content;
-	left: 2%;
-	top: 10%;
-	transition: all ease-in-out 0.1s;
-	z-index: 1;
+    display: inline-block;
+    position: absolute;
+    width: min-content;
+    left: 2%;
+    top: 10%;
+    transition: all ease-in-out 0.1s;
+    z-index: 1;
 }
+
 .search-bar > div:nth-child(3) {
-	display: inline-block;
-	position: absolute;
-	width: min-content;
-	right: 2%;
-	top: 10%;
-	transition: all ease-in-out 0.1s;
-	z-index: 1;
+    display: inline-block;
+    position: absolute;
+    width: min-content;
+    right: 2%;
+    top: 10%;
+    transition: all ease-in-out 0.1s;
+    z-index: 1;
 }
+
+/* Position the search button correctly */
+.new-search-btn {
+    position: absolute;
+    right: -72px; /* Maintain position at the right */
+    top: 14%; /* Aligns with the search bar */
+    background-color: #c3c5f5;
+    color: #141b34;
+    border: none;
+    border-radius: 18px;
+    font-size: 14px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.new-search-btn:hover {
+    background-color: #a3a5e5; /* Slightly darker shade for hover */
+    color: white;
+}
+
+/* Position the mic container */
+.mic-container {
+    display: inline-block;
+    position: absolute;
+    width: min-content;
+    right: 15px; /* Position it further to the left to avoid overlap with search button */
+    top: 19%;
+    cursor: pointer;
+    transition: all ease-in-out 0.1s;
+    z-index: 1;
+}
+
+/* Speech recognition styles */
+.mic-ico {
+    transition: color 0.3s ease;
+}
+
+.mic-ico.listening {
+    color: #ff0000 !important;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Tooltip for microphone */
+.mic-container::after {
+    content: "Click to speak";
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.mic-container:hover::after {
+    opacity: 1;
+}
+
 input:focus {
 	outline: none;
 }
@@ -490,31 +569,6 @@ transform: translateX(5px);  /* Slight movement to the right */
     .hamburger{
         display: block;
     }
-}
-
-
-
-
-
-
-.new-search-btn {
-    position: absolute;
-    right: -75px; /* Adjust this value to position it perfectly */
-    top: 17%; /* Aligns with the search bar */
-    background-color: #c3c5f5;
-    color: #141b34;
-    border: none;
-    border-radius: 18px;
-    font-size: 14px;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-}
-
-.new-search-btn:hover {
-    background-color: #a3a5e5; /* Slightly darker shade for hover */
-    color: white;
 }
 
 .home {

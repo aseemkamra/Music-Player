@@ -1,6 +1,10 @@
 // Global audio object to maintain playback state
 let globalAudio = null;
 
+// Speech recognition variables
+let recognition = null;
+let isListening = false;
+
 function secondsToTime(seconds) {
     if (isNaN(seconds) || seconds < 0) {
         return "00:00";
@@ -80,12 +84,105 @@ function navigateWithoutStopping(url) {
 
 let songs;
 
+// Speech recognition setup
+function setupSpeechRecognition() {
+    try {
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        
+        if (window.SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+            
+            // When speech is recognized
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                const searchInput = document.getElementById('search-input');
+                searchInput.value = transcript;
+                
+                // Trigger search if needed
+                if (document.getElementById('search-btn')) {
+                    // Auto-trigger search after voice input
+                    document.getElementById('search-btn').click();
+                }
+                
+                // Visual feedback when done
+                toggleMicrophoneState(false);
+            };
+            
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error', event.error);
+                toggleMicrophoneState(false);
+            };
+            
+            recognition.onend = function() {
+                toggleMicrophoneState(false);
+            };
+            
+            // Set up mic button click event
+            const micContainer = document.querySelector('.mic-container');
+            if (micContainer) {
+                micContainer.style.cursor = 'pointer';
+                micContainer.addEventListener('click', toggleSpeechRecognition);
+            }
+        } else {
+            console.error('Speech recognition not supported in this browser');
+            // Hide microphone if not supported
+            const micContainer = document.querySelector('.mic-container');
+            if (micContainer) {
+                micContainer.style.display = 'none';
+            }
+        }
+    } catch (error) {
+        console.error('Error setting up speech recognition:', error);
+        // Hide microphone on error
+        const micContainer = document.querySelector('.mic-container');
+        if (micContainer) {
+            micContainer.style.display = 'none';
+        }
+    }
+}
+
+function toggleSpeechRecognition() {
+    if (!recognition) return;
+    
+    if (isListening) {
+        recognition.stop();
+    } else {
+        try {
+            recognition.start();
+            toggleMicrophoneState(true);
+        } catch (error) {
+            console.error('Error starting speech recognition:', error);
+            toggleMicrophoneState(false);
+        }
+    }
+}
+
+function toggleMicrophoneState(listening) {
+    isListening = listening;
+    const micIcon = document.querySelector('.mic-ico');
+    
+    if (micIcon) {
+        if (listening) {
+            micIcon.classList.add('listening');
+        } else {
+            micIcon.classList.remove('listening');
+        }
+    }
+}
+
 async function main() {
     const playButton = document.getElementById("play");
     const previousButton = document.getElementById("previous");
     const nextButton = document.getElementById("next");
     const volumeControl = document.getElementById("volumeControl");
 
+    // Setup speech recognition
+    setupSpeechRecognition();
+    
     let currentSong = new Audio();
     currentSong.volume = 0.5; // Set default volume
     
@@ -305,6 +402,74 @@ async function main() {
             localStorage.setItem('currentSongTime', globalAudio.currentTime.toString());
             localStorage.setItem('isPlaying', (!globalAudio.paused).toString());
             localStorage.setItem('currentVolume', globalAudio.volume.toString());
+        }
+    });
+
+    // Add search button functionality
+    const searchBtn = document.getElementById('search-btn');
+    const searchInput = document.getElementById('search-input');
+
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', performSearch);
+        
+        // Also trigger search on Enter key
+        searchInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+}
+
+function performSearch() {
+    const query = searchInput.value.trim().toLowerCase();
+    if (!query) return;
+    
+    console.log('Searching for:', query);
+    
+    // Filter songs based on the search query
+    const filteredSongs = songs.filter(song => 
+        song.toLowerCase().includes(query)
+    );
+    
+    // Update the song list with filtered results
+    displaySearchResults(filteredSongs);
+}
+
+function displaySearchResults(filteredSongs) {
+    const songList = document.querySelector(".songlist ul");
+    
+    // Clear existing song list
+    songList.innerHTML = '';
+    
+    if (filteredSongs.length === 0) {
+        songList.innerHTML = '<li class="no-results">No songs found matching your search</li>';
+        return;
+    }
+    
+    // Display filtered songs
+    for (const song of filteredSongs) {
+        songList.innerHTML += `
+            <li>
+                <img class="invert" src="images/music.svg" alt="">
+                <div class="info">
+                    <div>${song.replaceAll("%20", " ")} </div>
+                </div>
+                <div class="playnow">
+                    <span>Play Now</span>
+                    <img class="invert" src="images/play.svg" alt="">
+                </div>
+            </li>`;
+    }
+    
+    // Reattach event listeners to the filtered songs
+    const songItems = Array.from(songList.getElementsByTagName("li"));
+    songItems.forEach((item) => {
+        if (!item.classList.contains('no-results')) {
+            item.addEventListener("click", () => {
+                const track = item.querySelector(".info div").innerText.trim();
+                playMusic(track, globalAudio);
+            });
         }
     });
 }
