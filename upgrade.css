@@ -123,3 +123,37 @@ body {
 #subscription-benefits ul li {
     margin-bottom: 10px;
 }
+
+/* Add styling for the home logo */
+.home-logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+.home-logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.home-logo a:hover {
+    transform: scale(1.05);
+}
+
+.home-logo img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: invert(1); /* Invert colors for dark background */
+}
+
+.home-logo .logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #46b77c;
+    margin-left: 10px;
+    letter-spacing: 1px;
+}
