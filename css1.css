@@ -375,26 +375,40 @@ input:focus {
     cursor: pointer;
 }
 
-.logo {display: flex;          /* Use flexbox to align the image and text horizontally */
-align-items: center;    /* Vertically center the text and image */
-gap: 10px;              /* Space between the image and the text */
+.logo {
+    display: flex;          /* Use flexbox to align the image and text horizontally */
+    align-items: center;    /* Vertically center the text and image */
+    gap: 10px;              /* Space between the image and the text */
+}
+
+/* Make the logo into a clickable button */
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.logo a:hover {
+    transform: scale(1.05);
 }
 
 /* Styling for the text next to the logo */
 .logo-text {
-font-size: 30px;
-text-align: center;        /* Adjust font size */
-font-weight: bold;      /* Make the font bold */
-color: #46b77c;            /* White text color */
-font-family: 'Arial', sans-serif;  /* Choose a stylish font */
-letter-spacing: 2px;    /* Add some spacing between letters */
-transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
+    font-size: 30px;
+    text-align: center;        /* Adjust font size */
+    font-weight: bold;      /* Make the font bold */
+    color: #46b77c;            /* White text color */
+    font-family: 'Arial', sans-serif;  /* Choose a stylish font */
+    letter-spacing: 2px;    /* Add some spacing between letters */
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
 }
 
 /* Hover effect for the text */
 .logo-text:hover {
-color: #b1791f;         /* Change text color on hover */
-transform: translateX(5px);  /* Slight movement to the right */
+    color: #b1791f;         /* Change text color on hover */
+    transform: translateX(5px);  /* Slight movement to the right */
 }
 
 .playbar{
@@ -423,7 +437,7 @@ transform: translateX(5px);  /* Slight movement to the right */
     max-height: none;
 }
 
-.songlist ul{
+.songlist ul {
     padding: 0 12px;
 }
 
@@ -461,6 +475,10 @@ transform: translateX(5px);  /* Slight movement to the right */
     font-size: 12px;
     width: 60px;
     padding: 8px;
+}
+
+.music-icon, .song-details, .play-now, .play-icon {
+    display: none;
 }
 
 .songlist .info {
@@ -522,8 +540,56 @@ transform: translateX(5px);  /* Slight movement to the right */
     color: black;
 }
 
-.range input{
+.range input {
     cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+    border-radius: 5px;
+    background: #555;
+    outline: none;
+    opacity: 0.7;
+    transition: all 0.3s;
+}
+
+.range input:hover {
+    opacity: 1;
+}
+
+.range input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #888;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.range input::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border: none;
+    border-radius: 50%;
+    background: #888;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* High volume styling */
+.range input.high-volume {
+    background: linear-gradient(to right, #555 0%, #0066ff 50%, #ff3300 100%);
+}
+
+.range input.high-volume::-webkit-slider-thumb {
+    background: #0066ff;
+    box-shadow: 0 0 5px rgba(0, 102, 255, 0.7);
+}
+
+.range input.high-volume::-moz-range-thumb {
+    background: #0066ff;
+    box-shadow: 0 0 5px rgba(0, 102, 255, 0.7);
 }
 
 .volume {
@@ -532,6 +598,36 @@ transform: translateX(5px);  /* Slight movement to the right */
     align-items: center;
     gap: 12px;
     cursor: pointer;
+}
+
+.volume img.high-volume {
+    filter: drop-shadow(0 0 2px #0066ff);
+}
+
+.range {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.range input {
+    cursor: pointer;
+}
+
+.volume-percentage {
+    font-size: 12px;
+    color: black;
+    margin-left: 8px;
+    width: 38px;
+    text-align: left;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.high-volume {
+    color: #0066ff !important;
+    font-weight: bold !important;
+    text-shadow: 0 0 1px rgba(0, 102, 255, 0.5);
 }
 
 @media (max-width:1000px){
@@ -916,4 +1012,149 @@ transform: translateX(5px);  /* Slight movement to the right */
     color: #aaa;
     display: block;
     margin-top: 2px;
+}
+
+/* Dolby Atmos feature styling */
+.dolby-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 18px;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #444;
+    filter: grayscale(1);
+}
+
+.dolby-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    transform: scale(1.05);
+}
+
+.dolby-toggle.active {
+    background: linear-gradient(135deg, #0066ff, #00ccff);
+    border-color: #0099ff;
+    filter: grayscale(0);
+    box-shadow: 0 0 10px rgba(0, 153, 255, 0.5);
+}
+
+.dolby-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+.dolby-toggle.active .dolby-icon {
+    transform: scale(1.1);
+}
+
+.dolby-toggle span {
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.dolby-toggle.active span {
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Add Dolby logo in playbar */
+@keyframes dolbyPulse {
+    0% { opacity: 0.8; filter: brightness(1); }
+    50% { opacity: 1; filter: brightness(1.2); }
+    100% { opacity: 0.8; filter: brightness(1); }
+}
+
+.dolby-toggle.active {
+    animation: dolbyPulse 2s infinite ease-in-out;
+}
+
+/* API search results styling */
+.song-thumbnail {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.song-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.api-result {
+    display: flex;
+    align-items: center;
+    padding: 10px !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    transition: all 0.2s ease;
+}
+
+.api-result:hover {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.api-result.active {
+    background-color: rgba(29, 185, 84, 0.3) !important;
+    border-color: rgba(29, 185, 84, 0.8) !important;
+}
+
+.song-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 2px;
+    color: white;
+}
+
+.song-artist {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.loading-results {
+    text-align: center;
+    padding: 20px !important;
+    color: #aaa;
+    background-color: transparent !important;
+    border: none !important;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.search-section-header {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 10px 0 !important;
+    margin: 10px 0 5px 0 !important;
+    cursor: default !important;
+}
+
+.search-section-header:hover {
+    background-color: transparent !important;
+}
+
+.search-section-header h3 {
+    color: #1DB954;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(29, 185, 84, 0.3);
+    padding-bottom: 5px;
+}
+
+.info .song-title,
+.info .song-artist {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
 }

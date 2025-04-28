@@ -19,8 +19,11 @@
                 <img width="20px" class="invert" src="images/close.svg" alt="">
             </div>
             <div class="home bg-grey rounded m-1 p-1">
-                <div class="logo"><img style="width: 100px;"  src="images/Radio.png" class="invert" alt="">
-                    <span class="logo-text">  Groove </span>
+                <div class="logo">
+                    <a href="javascript:void(0);" id="refresh-home" title="Refresh Home Page">
+                        <img style="width: 100px;" src="images/Radio.png" class="invert" alt="">
+                        <span class="logo-text">Groove</span>
+                    </a>
                 </div>
                 <ul class="nav-items">
                     <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
@@ -295,7 +298,8 @@
                                 <img width="25" src="images/volume.svg" alt="">
                                 
                                 <div class="range">
-                                    <input type="range" name="volume" id="volumeControl" min="0" max="1" step="0.01">
+                                    <input type="range" name="volume" id="volumeControl" min="0" max="2" step="0.01" value="0.5">
+                                    <span class="volume-percentage">50%</span>
                                 </div>
                                 
                             </div>
