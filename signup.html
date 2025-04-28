@@ -1,130 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Groove Music Player - Sign Up</title>
-    <link rel="stylesheet" href="signup.css">
-    <style>
-        .message {
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            display: none;
-        }
-        .error {
-            background-color: #ffecec;
-            color: #ff5252;
-            border: 1px solid #ffadad;
-        }
-        .success {
-            background-color: #e8f5e9;
-            color: #4caf50;
-            border: 1px solid #a5d6a7;
-        }
-    </style>
-    <script src="user.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Groove Music Player - Sign Up</title>
+  <link rel="stylesheet" href="signup.css">
+  <style>
+    .message {
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 5px;
+      display: none;
+      font-weight: bold;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+    .error {
+      background-color: #ffecec;
+      color: #d32f2f;
+      border: 1px solid #f44336;
+    }
+    .success {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid #66bb6a;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  </style>
+  <script src="user.js" defer></script>
 </head>
 <body>
-    <div class="signup-container">
-        <div class="logo">
-            <h1>Groove Music Player</h1>
-        </div>
-        <h2>Join us and get groovin'</h2>
+  <main class="signup-container">
+    <header class="logo">
+      <h1>Groove Music Player</h1>
+    </header>
 
-        <div id="message" class="message"></div>
+    <section>
+      <h2>Join us and get groovin'</h2>
+      <div id="message" class="message"></div>
 
-        <form class="signup-form" id="signupForm">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Choose a username" required>
-            
-            <label for="email">Email address</label>
-            <input type="email" id="email" placeholder="name@domain.com" required>
+      <form class="signup-form" id="signupForm" novalidate>
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Choose a username" required>
 
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password" required>
+        <label for="email">Email address</label>
+        <input type="email" id="email" placeholder="name@domain.com" required>
 
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" placeholder="Confirm password" required>
-            
-            <button type="submit" class="btn next">Get Started</button>
-        </form>
-        
-        <div class="divider">
-            <span>or</span>
-        </div>
-        
-        <!-- <div class="social-signup">
-            <button class="btn google">Sign up with Google</button>
-            <button class="btn facebook">Sign up with Facebook</button>
-            <button class="btn apple">Sign up with Apple</button>
-        </div> -->
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" minlength="6" required>
 
-        <p class="login-link">Already have an account? <a href="login.html">Log in here</a></p>
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password" required>
 
-        <footer>
-            <p>This site is protected by reCAPTCHA and the Google <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> apply.</p>
-        </footer>
-    </div>
+        <button type="submit" class="btn next" id="submitBtn">Get Started</button>
+      </form>
 
-    <script>
-        // Show message function
-        function showMessage(text, isError = false) {
-            const messageEl = document.getElementById('message');
-            messageEl.textContent = text;
-            messageEl.className = isError ? 'message error' : 'message success';
-            messageEl.style.display = 'block';
-            
-            // Auto hide after 5 seconds
-            setTimeout(() => {
-                messageEl.style.display = 'none';
-            }, 5000);
-        }
+      <div class="divider"><span>or</span></div>
 
-        // Handle signup form submission
-        document.getElementById('signupForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            
-            // Basic validation
-            if (!username || !email || !password || !confirmPassword) {
-                showMessage('Please fill in all fields', true);
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                showMessage('Passwords do not match', true);
-                return;
-            }
-            
-            if (password.length < 6) {
-                showMessage('Password must be at least 6 characters', true);
-                return;
-            }
-            
-            // Attempt to register user
-            const result = registerUser(username, email, password);
-            
-            if (result.success) {
-                showMessage('Registration successful! Redirecting to login...', false);
-                setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 1500);
-            } else {
-                showMessage(result.message || 'Registration failed. Please try again.', true);
-            }
-        });
-        
-        // Check if user is already logged in
-        document.addEventListener('DOMContentLoaded', function() {
-            if (isLoggedIn()) {
-                window.location.href = 'index.html';
-            }
-        });
-    </script>
+      <!-- Future social signup buttons
+      <div class="social-signup">
+        <button class="btn google">Sign up with Google</button>
+        <button class="btn facebook">Sign up with Facebook</button>
+        <button class="btn apple">Sign up with Apple</button>
+      </div> -->
+
+      <p class="login-link">Already have an account? <a href="login.html">Log in here</a></p>
+    </section>
+
+    <footer>
+      <p>This site is protected by reCAPTCHA and the Google 
+        <a href="#" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and 
+        <a href="#" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    const signupForm = document.getElementById('signupForm');
+    const messageEl = document.getElementById('message');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function showMessage(text, isError = false) {
+      messageEl.textContent = text;
+      messageEl.className = `message ${isError ? 'error' : 'success'}`;
+      messageEl.style.display = 'block';
+      
+      setTimeout(() => {
+        messageEl.style.display = 'none';
+      }, 5000);
+    }
+
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    signupForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      
+      if (!username || !email || !password || !confirmPassword) {
+        showMessage('Please fill in all fields.', true);
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        showMessage('Please enter a valid email address.', true);
+        return;
+      }
+
+      if (password.length < 6) {
+        showMessage('Password must be at least 6 characters.', true);
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showMessage('Passwords do not match.', true);
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Processing...';
+
+      // Simulate API call to register user
+      const result = registerUser(username, email, password);
+
+      if (result.success) {
+        showMessage('Registration successful! Redirecting...', false);
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 1500);
+      } else {
+        showMessage(result.message || 'Registration failed. Please try again.', true);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Get Started';
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      if (isLoggedIn()) {
+        window.location.href = 'index.html';
+      }
+    });
+  </script>
 </body>
 </html>
